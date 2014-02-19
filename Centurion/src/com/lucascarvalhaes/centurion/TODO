@@ -1,0 +1,18 @@
+TO-DO:
+	*Test the new model for massive ents.
+	*Test the new model for data reliability.
+	*? The renderers of the entity framework could receive only the path to the atlas instead of the entire thing.
+	*? Add a limit of info to the datamap.
+	*Simulate the world on the client too. Add interpolation with the messages from the server.
+	*Add disposal to all disposables.
+	
+DOING:
+	*Apply the best compression method (chunked data may be good). 0%
+	*Fix the underflow bug. 50%
+	*Rebuild the game client to the new model. 70%
+	*Make the game server according to the model (The 2 messaging models as sequence diagrams and the internal server model in the state machine). 60%
+	*Try to reduce the traffic even more. 80%
+	*Fix the box2d client crash. 90%
+	
+DONE:
+	*Fix the underflow bug. 50%
