@@ -35,6 +35,10 @@ public abstract class NWEntity extends Entity implements NWInterface {
 	public NWEntity() {
 	}
 
+
+	/**
+	 * When networked, an entity gets an ID associated with its owner.
+	 */
 	@Override
 	public String getEntityID() {
 		return entityID + "@" + ownerID;

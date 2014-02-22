@@ -30,6 +30,8 @@ public abstract class NWCreator implements NWInterface {
 		// Check if we got a valid instance of a nwentity
 		if (inst instanceof NWEntity)
 			ent = (NWEntity) inst;
+		else
+			return null;
 
 		// Try to apply the create message
 		if (ent != null)
