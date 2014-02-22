@@ -41,7 +41,6 @@ public class Messaging {
 		kryo.register(AlreadyLoggedIn.class);
 		kryo.register(SpawnPlayer.class);
 		kryo.register(SpawnEntity.class);
-		kryo.register(SpawnLiveEntity.class);
 		kryo.register(AvaliableID.class);
 
 		// Server to client
@@ -195,28 +194,13 @@ public class Messaging {
 		}
 	}
 
+
+
 	/**
-	 * A spawn live entity message
+	 * The server pushes news each simulation.<br>
+	 * This only includes update messages.
 	 * 
 	 * @author Lucas M Carvalhaes
-	 * 
-	 */
-	public static class SpawnLiveEntity {
-		public HashMap<String, Object>	entCreateMsg;
-		public String					ownerID;
-
-		public static SpawnLiveEntity make(NWLiveEntity ent, String owner) {
-			SpawnLiveEntity ret = new SpawnLiveEntity();
-			ret.entCreateMsg = ent.nwCreate();
-			ret.ownerID = owner;
-			return ret;
-		}
-	}
-
-	/**
-	 * The server pushes news each sim
-	 * 
-	 * @author Lucas
 	 * 
 	 */
 	public static class Snapshot {
@@ -276,6 +260,22 @@ public class Messaging {
 			NewEntities ret = new NewEntities();
 			ret.newEntities = newEntities2;
 			return ret;
+		}
+	}
+
+	/**
+	 * A message generated when a player is dropped from the server.
+	 * 
+	 * @author Lucas M Carvalhaes
+	 * 
+	 */
+	public static class PlayerDropped {
+		Player	p;
+
+		public static PlayerDropped make(Player p) {
+			PlayerDropped pd = new PlayerDropped();
+			pd.p = p;
+			return pd;
 		}
 	}
 }

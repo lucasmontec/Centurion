@@ -9,9 +9,9 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.esotericsoftware.kryonet.Connection;
 import com.esotericsoftware.kryonet.Listener;
 import com.esotericsoftware.kryonet.Server;
+import com.lucascarvalhaes.centurion.model.Centurion;
 import com.lucascarvalhaes.centurion.model.Entity;
 import com.lucascarvalhaes.centurion.model.EntityCointainerListener;
-import com.lucascarvalhaes.centurion.model.Centurion;
 import com.lucascarvalhaes.centurion.model.ManagerComponentAdapter;
 import com.lucascarvalhaes.centurion.model.Player;
 import com.lucascarvalhaes.centurion.networking.Messaging.AlreadyLoggedIn;
@@ -19,9 +19,9 @@ import com.lucascarvalhaes.centurion.networking.Messaging.AvaliableID;
 import com.lucascarvalhaes.centurion.networking.Messaging.EntitiesOnTheServer;
 import com.lucascarvalhaes.centurion.networking.Messaging.Login;
 import com.lucascarvalhaes.centurion.networking.Messaging.NewEntities;
+import com.lucascarvalhaes.centurion.networking.Messaging.PlayerDropped;
 import com.lucascarvalhaes.centurion.networking.Messaging.RemoveEntities;
 import com.lucascarvalhaes.centurion.networking.Messaging.Snapshot;
-import com.lucascarvalhaes.centurion.networking.Messaging.SpawnLiveEntity;
 import com.lucascarvalhaes.centurion.networking.gameModel.NWEntity;
 import com.lucascarvalhaes.centurion.physics.PhysicsManagerComponent;
 import com.lucascarvalhaes.centurion.testing.DebugNetworkListener;
@@ -186,10 +186,8 @@ public abstract class GameServer {
 		return true;
 	}
 
-
-
 	private void playerDropped(int connectionID) {
-		// TODO send player dropped msg
+		server.sendToAllTCP(PlayerDropped.make(players.get(connectionID)));
 		players.remove(connectionID);
 	}
 
@@ -236,10 +234,6 @@ public abstract class GameServer {
 					server.sendToTCP(con.getID(), new AlreadyLoggedIn());
 					con.close();
 				}
-			}
-
-			if (obj instanceof SpawnLiveEntity) {
-				return;
 			}
 
 		}

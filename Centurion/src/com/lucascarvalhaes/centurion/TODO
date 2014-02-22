@@ -1,5 +1,5 @@
 TO-DO:
-	*Box2D as a addon?
+	*Box2D as an option
 	*Test the new model for massive ents.
 	*Test the new model for data reliability.
 	*? The renderers of the entity framework could receive only the path to the atlas instead of the entire thing.

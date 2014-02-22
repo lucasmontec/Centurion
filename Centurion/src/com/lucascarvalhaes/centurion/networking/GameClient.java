@@ -16,6 +16,7 @@ import com.lucascarvalhaes.centurion.networking.Messaging.ControlShip;
 import com.lucascarvalhaes.centurion.networking.Messaging.EntitiesOnTheServer;
 import com.lucascarvalhaes.centurion.networking.Messaging.Login;
 import com.lucascarvalhaes.centurion.networking.Messaging.NewEntities;
+import com.lucascarvalhaes.centurion.networking.Messaging.PlayerDropped;
 import com.lucascarvalhaes.centurion.networking.Messaging.RemoveEntities;
 import com.lucascarvalhaes.centurion.networking.Messaging.Snapshot;
 import com.lucascarvalhaes.centurion.networking.Messaging.SpawnPlayer;
@@ -312,6 +313,11 @@ public class GameClient {
 			// Receive the entities on the server after a succesful login
 			if (obj instanceof EntitiesOnTheServer) {
 				receiveAllEntitiesOnServer((EntitiesOnTheServer) obj);
+			}
+
+			// Player dropped - remove all his entities
+			if (obj instanceof PlayerDropped) {
+				clientManager.removeAllFromOwner(((PlayerDropped) obj).p.getPlayerID());
 			}
 
 		}
